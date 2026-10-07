@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="RapidCare - Emergency Hospital Recommendation System">
+
+    <title>
+        {% block title %}
+        RapidCare
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="{{ url_for('index') }}"
+           class="brand">
+
+            <div class="brand-icon">
+                +
+            </div>
+
+            <div>
+
+                <span class="brand-name">
+                    RapidCare
+                </span>
+
+                <span class="brand-subtitle">
+                    Smart Emergency Support
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('index') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('dashboard') }}">
+                Analytics
+            </a>
+
+            <a href="{{ url_for('index') }}"
+               class="nav-button">
+
+                Find Hospital
+
+            </a>
+
+        </nav>
+
+
+        <button class="mobile-menu"
+                onclick="toggleMenu()">
+
+            ☰
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div>
+
+            <div class="footer-brand">
+                RapidCare
+            </div>
+
+            <p>
+                Data Mining & Data Warehousing Project
+            </p>
+
+        </div>
+
+
+        <div class="footer-info">
+
+            <span>
+                Bhubaneswar, Odisha
+            </span>
+
+            <span>
+                Academic Prototype
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 RapidCare. Developed for academic purposes.
+        </p>
+
+        <p>
+            Hospital availability shown is simulated data.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+</body>
+
+</html>

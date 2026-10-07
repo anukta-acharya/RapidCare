@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+emergency_admit.db
+
+*.png
+*.jpg
+*.jpeg
+
+.DS_Store

@@ -1,0 +1,420 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+RapidCare | Hospital Recommendations
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="results-section">
+
+
+    <div class="section-container">
+
+
+        <!-- HEADER -->
+
+        <div class="results-header">
+
+            <div>
+
+                <span class="section-label">
+                    RAPIDCARE ANALYSIS COMPLETE
+                </span>
+
+                <h1>
+                    Recommended Hospitals
+                </h1>
+
+                <p>
+                    Suitable hospitals for
+                    <strong>{{ emergency_type }}</strong>
+                    near
+                    <strong>{{ locality }}</strong>
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('index') }}"
+               class="secondary-button">
+
+                ← New Search
+
+            </a>
+
+        </div>
+
+
+        {% if error %}
+
+
+        <!-- ERROR -->
+
+        <div class="error-box">
+
+            <div class="error-icon">
+                !
+            </div>
+
+            <div>
+
+                <h2>
+                    No matching hospital found
+                </h2>
+
+                <p>
+                    {{ error }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- SUMMARY -->
+
+        <div class="result-summary">
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon">
+                    ◉
+                </span>
+
+                <div>
+
+                    <small>
+                        PATIENT LOCATION
+                    </small>
+
+                    <strong>
+                        {{ locality }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon emergency">
+                    +
+                </span>
+
+                <div>
+
+                    <small>
+                        EMERGENCY
+                    </small>
+
+                    <strong>
+                        {{ emergency_type }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span class="summary-icon success">
+                    ✓
+                </span>
+
+                <div>
+
+                    <small>
+                        MATCHES FOUND
+                    </small>
+
+                    <strong>
+                        {{ results|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RESULTS -->
+
+        <div class="results-list">
+
+
+            {% for hospital in results %}
+
+
+            <article class="hospital-card
+                            {% if loop.first %}
+                            top-result
+                            {% endif %}">
+
+
+                {% if loop.first %}
+
+                <div class="top-match">
+                    TOP MATCH
+                </div>
+
+                {% endif %}
+
+
+                <div class="hospital-header">
+
+
+                    <div class="hospital-title">
+
+                        <div class="hospital-rank">
+                            {{ "%02d"|format(loop.index) }}
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                {{ hospital.hospital_name }}
+                            </h2>
+
+                            <p>
+                                Suitable for {{ emergency_type }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-circle">
+
+                        <div>
+
+                            <strong>
+                                {{ (hospital.final_score * 100)|round|int }}
+                            </strong>
+
+                            <span>
+                                MATCH
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- METRICS -->
+
+                <div class="hospital-metrics">
+
+
+                    <div class="metric">
+
+                        <span class="metric-icon">
+                            ↗
+                        </span>
+
+                        <div>
+
+                            <small>
+                                DISTANCE
+                            </small>
+
+                            <strong>
+                                {{ hospital.distance_km|round(2) }} km
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span class="metric-icon green">
+                            ▣
+                        </span>
+
+                        <div>
+
+                            <small>
+                                BEDS AVAILABLE
+                            </small>
+
+                            <strong>
+                                {{ hospital.available_beds }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span class="metric-icon blue">
+                            +
+                        </span>
+
+                        <div>
+
+                            <small>
+                                ICU AVAILABLE
+                            </small>
+
+                            <strong>
+                                {{ hospital.icu_available }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span class="metric-icon purple">
+                            ◉
+                        </span>
+
+                        <div>
+
+                            <small>
+                                VENTILATORS
+                            </small>
+
+                            <strong>
+                                {{ hospital.ventilators_available }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <span class="metric-icon orange">
+                            ◷
+                        </span>
+
+                        <div>
+
+                            <small>
+                                AVG WAIT
+                            </small>
+
+                            <strong>
+                                {{ hospital.avg_wait_time_min }}
+                                min
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- SCORE -->
+
+                <div class="score-breakdown">
+
+
+                    <div class="score-heading">
+
+                        <span>
+                            Recommendation Score
+                        </span>
+
+                        <strong>
+                            {{ (hospital.final_score * 100)|round|int }}/100
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div class="progress-fill"
+                             data-score="{{ (hospital.final_score * 100)|round|int }}">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="score-labels">
+
+                        <span>
+                            Distance
+                        </span>
+
+                        <span>
+                            Resources
+                        </span>
+
+                        <span>
+                            Bed Capacity
+                        </span>
+
+                        <span>
+                            Wait Time
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% endif %}
+
+
+        <!-- DISCLAIMER -->
+
+        <div class="result-disclaimer">
+
+            <span>
+                ⓘ
+            </span>
+
+            <p>
+                Recommendations are generated by the
+                academic recommendation model using
+                simulated hospital availability data.
+                They should not be used as real-time
+                medical advice.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,9 @@
+emergency_type_id,emergency_type,required_specialty,required_resources,severity_level,golden_hour_minutes
+E01,Cardiac Arrest / Heart Attack,Cardiology,ICU;Ventilator,Critical,10
+E02,Road Traffic Accident / Trauma,Trauma Surgery/Orthopedics,Trauma Center;Blood Bank;ICU,Critical,10
+E03,Stroke,Neurology,ICU;Ventilator;CT Scan,Critical,15
+E04,Severe Respiratory Distress,Pulmonology,ICU;Ventilator,Critical,12
+E05,Obstetric Emergency,Obstetrics & Gynecology,ICU;Blood Bank,High,20
+E06,Pediatric Emergency,Pediatrics,ICU;Ventilator,High,15
+E07,Severe Burns,Plastic Surgery/Burns Unit,Trauma Center;ICU;Blood Bank,Critical,15
+E08,Poisoning / Overdose,General Medicine/Toxicology,ICU;Ventilator,High,20

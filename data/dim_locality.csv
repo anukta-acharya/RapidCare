@@ -1,0 +1,51 @@
+locality_id,locality_name,zone,latitude,longitude,density_level
+L01,Patia,North,20.3559,85.8203,High
+L02,Chandrasekharpur,North,20.3492,85.8181,High
+L03,Nayapalli,Central,20.2961,85.8189,High
+L04,Jaydev Vihar,Central,20.2988,85.8245,Medium
+L05,Saheed Nagar,East,20.2833,85.8412,High
+L06,Old Town,South,20.2376,85.8340,Medium
+L07,Khandagiri,West,20.2601,85.7736,Medium
+L08,Bomikhal,East,20.2775,85.8583,High
+L09,Rasulgarh,East,20.2870,85.8570,High
+L10,Kalinga Nagar,North,20.3350,85.8170,Medium
+L11,Baramunda,West,20.2836,85.7833,Medium
+L12,Unit VI,Central,20.2700,85.8400,Medium
+L13,Vani Vihar,Central,20.2965,85.8320,Medium
+L14,Pokhariput,West,20.2650,85.7860,Low
+L15,Sundarpada,South,20.2450,85.7950,Low
+L16,Acharya Vihar,Central,20.3035,85.8335,High
+L17,Aerodrome Area,South,20.2520,85.8180,Medium
+L18,Airport Area,South,20.2510,85.8185,Medium
+L19,Jagamara,West,20.2560,85.7820,Medium
+L20,Dumduma,South,20.2440,85.7700,Medium
+L21,Tamando,West,20.2510,85.7450,Medium
+L22,Aiginia,South,20.2390,85.7700,Medium
+L23,Chandaka,North,20.3820,85.7540,Low
+L24,Raghunathpur,North,20.3800,85.8300,Medium
+L25,Kalarahanga,North,20.3540,85.8530,Medium
+L26,Andharua,North,20.3700,85.7550,Low
+L27,Barimunda,North,20.3500,85.7900,Low
+L28,Mancheswar,East,20.3270,85.8540,High
+L29,Mancheswar Industrial Area,East,20.3200,85.8700,High
+L30,Lingaraj Nagar,South,20.2500,85.8250,High
+L31,Dhauli,South,20.1920,85.8420,Low
+L32,Sisupalgarh,South,20.2200,85.8580,Medium
+L33,Janla,West,20.2450,85.7250,Low
+L34,Jatani,West,20.1590,85.7070,Medium
+L35,Khordha,West,20.1827,85.6160,Medium
+L36,Balianta,East,20.2750,85.9300,Medium
+L37,Balipatna,South,20.2360,85.9300,Low
+L38,Begunia,Northwest,20.1800,85.4300,Low
+L39,Bolagarh,Northwest,20.2300,85.3700,Low
+L40,Tangi,East,20.2000,85.5600,Low
+L41,Banapur,Southwest,19.8900,85.1800,Medium
+L42,Balugaon,Southwest,20.1700,85.1000,Medium
+L43,Chilika,Southwest,19.8500,85.1300,Low
+L44,Jankia,Northwest,20.2400,85.5500,Low
+L45,Nirakarpur,Southwest,20.0500,85.5600,Low
+L46,Kaipadar,West,20.1900,85.5200,Low
+L47,Arugul,West,20.1700,85.7300,Low
+L48,Angulapada,West,20.2000,85.6900,Low
+L49,Balianta Rural,East,20.2500,85.9700,Low
+L50,Bhimpur,South,20.2250,85.8000,Low

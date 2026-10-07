@@ -1,0 +1,648 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+RapidCare | Emergency Hospital Finder
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-background"></div>
+
+    <div class="hero-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="hero-content">
+
+            <div class="status-badge">
+
+                <span class="status-dot"></span>
+
+                SMART EMERGENCY SUPPORT
+
+            </div>
+
+
+            <h1>
+
+                Find the right hospital
+
+                <span>
+                    when every minute matters.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                RapidCare uses data mining and hospital
+                resource information to identify suitable
+                hospitals for emergency situations in
+                Bhubaneswar.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a href="#search"
+                   class="primary-button">
+
+                    Find a Hospital
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="secondary-button">
+
+                    View Analytics
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-stats">
+
+                <div>
+
+                    <strong>
+                        37+
+                    </strong>
+
+                    <span>
+                        Hospitals
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        10+
+                    </strong>
+
+                    <span>
+                        Localities
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        6
+                    </strong>
+
+                    <span>
+                        Emergency Types
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="hero-visual">
+
+
+            <div class="floating-card card-one">
+
+                <span class="mini-icon green">
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Resource Match
+                    </strong>
+
+                    <small>
+                        ICU • Beds • Ventilators
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="hospital-visual">
+
+                <div class="pulse pulse-one"></div>
+
+                <div class="pulse pulse-two"></div>
+
+                <div class="map-pin">
+
+                    <span>
+                        +
+                    </span>
+
+                </div>
+
+                <div class="visual-ring"></div>
+
+            </div>
+
+
+            <div class="floating-card card-two">
+
+                <span class="mini-icon blue">
+                    ↗
+                </span>
+
+                <div>
+
+                    <strong>
+                        Smart Ranking
+                    </strong>
+
+                    <small>
+                        Distance + Availability
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section class="search-section"
+         id="search">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                RAPIDCARE ANALYSIS
+            </span>
+
+            <h2>
+                Find a suitable hospital
+            </h2>
+
+            <p>
+                Enter the patient's location and emergency
+                type to generate a ranked hospital list.
+            </p>
+
+        </div>
+
+
+        <div class="search-panel">
+
+
+            <form method="POST"
+                  action="{{ url_for('index') }}">
+
+
+                <div class="form-grid">
+
+
+                    <!-- LOCALITY -->
+
+                    <div class="form-group">
+
+                        <label for="locality">
+                            Patient Locality
+                        </label>
+
+
+                        <div class="select-wrapper">
+
+                            <span class="input-icon">
+                                ◉
+                            </span>
+
+                            <select id="locality"
+                                    name="locality"
+                                    required>
+
+                                {% for locality in localities %}
+
+                                <option value="{{ locality }}">
+
+                                    {{ locality }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMERGENCY -->
+
+                    <div class="form-group">
+
+                        <label for="etype">
+                            Emergency Type
+                        </label>
+
+
+                        <div class="select-wrapper">
+
+                            <span class="input-icon">
+                                +
+                            </span>
+
+                            <select id="etype"
+                                    name="etype"
+                                    required>
+
+                                {% for emergency in etypes %}
+
+                                <option value="{{ emergency }}">
+
+                                    {{ emergency }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- GPS -->
+
+                <div class="location-box">
+
+                    <div class="location-left">
+
+                        <div class="location-icon">
+                            📍
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Use current location
+                            </strong>
+
+                            <p id="location-status">
+
+                                Optional: allow browser location
+                                access for future proximity analysis.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="button"
+                            class="location-button"
+                            onclick="getLocation()">
+
+                        Detect Location
+
+                    </button>
+
+                </div>
+
+
+                <input type="hidden"
+                       name="latitude"
+                       id="latitude">
+
+
+                <input type="hidden"
+                       name="longitude"
+                       id="longitude">
+
+
+                <button type="submit"
+                        class="search-button">
+
+                    <span>
+                        Analyze Hospitals
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading center">
+
+            <span class="section-label">
+                HOW RAPIDCARE WORKS
+            </span>
+
+            <h2>
+                Data-driven emergency matching
+            </h2>
+
+            <p>
+                The system combines multiple hospital factors
+                before generating recommendations.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    01
+                </div>
+
+                <div class="feature-icon">
+                    ◉
+                </div>
+
+                <h3>
+                    Location Analysis
+                </h3>
+
+                <p>
+                    Uses the patient's selected locality
+                    and hospital distance information.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    02
+                </div>
+
+                <div class="feature-icon">
+                    +
+                </div>
+
+                <h3>
+                    Emergency Matching
+                </h3>
+
+                <p>
+                    Matches the emergency type with
+                    hospital capabilities and resources.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    03
+                </div>
+
+                <div class="feature-icon">
+                    ▣
+                </div>
+
+                <h3>
+                    Resource Analysis
+                </h3>
+
+                <p>
+                    Considers beds, ICU availability,
+                    ventilators and other resources.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    04
+                </div>
+
+                <div class="feature-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Smart Ranking
+                </h3>
+
+                <p>
+                    Produces a ranked list using the
+                    recommendation model.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DATA MINING ================= -->
+
+<section class="technology-section">
+
+    <div class="section-container">
+
+
+        <div class="technology-content">
+
+            <span class="section-label">
+                DATA MINING & WAREHOUSING
+            </span>
+
+            <h2>
+                More than just a hospital search.
+            </h2>
+
+            <p>
+                RapidCare uses a structured healthcare
+                data warehouse and data mining techniques
+                to identify patterns and relationships
+                within emergency admission data.
+            </p>
+
+
+            <div class="tech-list">
+
+                <div>
+                    <span>✓</span>
+                    K-Means hospital clustering
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Emergency pattern analysis
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Decision Tree classification
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Hospital recommendation scoring
+                </div>
+
+            </div>
+
+
+            <a href="{{ url_for('dashboard') }}"
+               class="primary-button">
+
+                Explore Analytics →
+
+            </a>
+
+        </div>
+
+
+        <div class="data-visual">
+
+
+            <div class="data-window">
+
+                <div class="window-top">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="data-lines">
+
+                    <div>
+                        <span>Hospital</span>
+                        <span>Score</span>
+                    </div>
+
+                    <div>
+                        <span>Hospital A</span>
+                        <strong>0.92</strong>
+                    </div>
+
+                    <div>
+                        <span>Hospital B</span>
+                        <strong>0.87</strong>
+                    </div>
+
+                    <div>
+                        <span>Hospital C</span>
+                        <strong>0.81</strong>
+                    </div>
+
+                    <div>
+                        <span>Hospital D</span>
+                        <strong>0.76</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DISCLAIMER ================= -->
+
+<section class="disclaimer-section">
+
+    <div class="section-container">
+
+        <div class="disclaimer">
+
+            <span class="warning-icon">
+                !
+            </span>
+
+            <div>
+
+                <strong>
+                    Academic Prototype
+                </strong>
+
+                <p>
+                    RapidCare is a student data mining and
+                    data warehousing project. Hospital
+                    availability and resource values used
+                    by this prototype are simulated data
+                    and are not real-time medical information.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

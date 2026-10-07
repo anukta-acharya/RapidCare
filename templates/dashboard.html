@@ -1,0 +1,495 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+RapidCare | Analytics Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="dashboard-section">
+
+
+    <div class="section-container">
+
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <span class="section-label">
+                DATA MINING & DATA WAREHOUSING
+            </span>
+
+            <h1>
+                Healthcare Analytics Dashboard
+            </h1>
+
+            <p>
+                Explore the structure of the RapidCare
+                healthcare dataset and the data mining
+                techniques used by the project.
+            </p>
+
+        </div>
+
+
+        <!-- KPI CARDS -->
+
+        <div class="kpi-grid">
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    🏥
+                </div>
+
+                <div>
+
+                    <span>
+                        Hospitals
+                    </span>
+
+                    <strong>
+                        {{ hospital_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    🚑
+                </div>
+
+                <div>
+
+                    <span>
+                        Emergency Types
+                    </span>
+
+                    <strong>
+                        {{ emergency_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <span>
+                        Localities
+                    </span>
+
+                    <strong>
+                        {{ locality_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <span>
+                        Admission Records
+                    </span>
+
+                    <strong>
+                        {{ admission_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- DATA WAREHOUSE -->
+
+        <section class="dashboard-block">
+
+
+            <div class="block-heading">
+
+                <span class="section-label">
+                    DATA WAREHOUSE
+                </span>
+
+                <h2>
+                    Star Schema Architecture
+                </h2>
+
+                <p>
+                    RapidCare organizes healthcare information
+                    using fact and dimension tables.
+                </p>
+
+            </div>
+
+
+            <div class="schema">
+
+
+                <div class="dimension-card">
+
+                    <span>
+                        DIMENSION
+                    </span>
+
+                    <h3>
+                        dim_hospital
+                    </h3>
+
+                    <p>
+                        Hospital name<br>
+                        Hospital type<br>
+                        Beds<br>
+                        ICU<br>
+                        Ventilators
+                    </p>
+
+                </div>
+
+
+                <div class="dimension-card">
+
+                    <span>
+                        DIMENSION
+                    </span>
+
+                    <h3>
+                        dim_locality
+                    </h3>
+
+                    <p>
+                        Locality name<br>
+                        Latitude<br>
+                        Longitude
+                    </p>
+
+                </div>
+
+
+                <div class="fact-card">
+
+                    <span>
+                        FACT TABLE
+                    </span>
+
+                    <h3>
+                        fact_emergency_admission
+                    </h3>
+
+                    <p>
+                        Distance<br>
+                        Travel Time<br>
+                        Wait Time<br>
+                        Outcome<br>
+                        Emergency ID
+                    </p>
+
+                </div>
+
+
+                <div class="dimension-card">
+
+                    <span>
+                        DIMENSION
+                    </span>
+
+                    <h3>
+                        dim_emergency_type
+                    </h3>
+
+                    <p>
+                        Emergency Type<br>
+                        Severity Level<br>
+                        Required Resources
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- DATA MINING -->
+
+        <section class="dashboard-block">
+
+
+            <div class="block-heading">
+
+                <span class="section-label">
+                    DATA MINING
+                </span>
+
+                <h2>
+                    Analytical Techniques
+                </h2>
+
+            </div>
+
+
+            <div class="analysis-grid">
+
+
+                <div class="analysis-card">
+
+                    <div class="analysis-number">
+                        01
+                    </div>
+
+                    <h3>
+                        K-Means Clustering
+                    </h3>
+
+                    <p>
+                        Groups hospitals according to their
+                        healthcare capabilities using
+                        total beds, ICU beds, ventilators
+                        and specialist doctors.
+                    </p>
+
+                    <div class="analysis-tags">
+
+                        <span>
+                            Clustering
+                        </span>
+
+                        <span>
+                            Unsupervised
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-card">
+
+                    <div class="analysis-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Pattern Analysis
+                    </h3>
+
+                    <p>
+                        Identifies emergency patterns across
+                        localities and examines waiting times
+                        and outcomes by severity.
+                    </p>
+
+                    <div class="analysis-tags">
+
+                        <span>
+                            Patterns
+                        </span>
+
+                        <span>
+                            Trends
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-card">
+
+                    <div class="analysis-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Decision Tree
+                    </h3>
+
+                    <p>
+                        Classifies emergency admission
+                        outcomes using hospital and
+                        emergency-related features.
+                    </p>
+
+                    <div class="analysis-tags">
+
+                        <span>
+                            Classification
+                        </span>
+
+                        <span>
+                            Supervised
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT PIPELINE -->
+
+        <section class="dashboard-block">
+
+
+            <div class="block-heading">
+
+                <span class="section-label">
+                    RAPIDCARE PIPELINE
+                </span>
+
+                <h2>
+                    From Data to Recommendation
+                </h2>
+
+            </div>
+
+
+            <div class="pipeline">
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        Data Collection
+                    </strong>
+
+                    <small>
+                        Hospital & emergency data
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    →
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        Data Warehouse
+                    </strong>
+
+                    <small>
+                        Fact & dimension tables
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    →
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        03
+                    </span>
+
+                    <strong>
+                        Data Mining
+                    </strong>
+
+                    <small>
+                        Patterns & classification
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    →
+                </div>
+
+
+                <div class="pipeline-step active">
+
+                    <span>
+                        04
+                    </span>
+
+                    <strong>
+                        Recommendation
+                    </strong>
+
+                    <small>
+                        Ranked hospitals
+                    </small>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL NOTE -->
+
+        <div class="dashboard-note">
+
+            <strong>
+                Academic Project Notice
+            </strong>
+
+            <p>
+                The healthcare records and hospital resource
+                availability used in this project are simulated
+                for academic demonstration. The dashboard is
+                intended to demonstrate Data Mining and Data
+                Warehousing concepts.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
