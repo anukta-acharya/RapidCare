@@ -1,82 +1,173 @@
-# Emergency Admit
+# 🚑 RapidCare – Emergency Hospital Recommendation System
 
-A Data Mining & Data Warehousing course project that recommends the
-best-fit hospital in Bhubaneswar, Odisha for a sudden medical emergency,
-based on locality, required resources, and simulated hospital availability.
+RapidCare is an **Emergency Hospital Recommendation System** developed using **Data Mining and Data Warehousing** concepts.
 
-## Folder structure
+The system recommends and ranks suitable hospitals based on the patient's **locality** and **emergency type**. The recommendation considers hospital resources, distance, ICU availability, available beds, waiting time, and specialist doctors.
 
-```
-emergency_admit/
-├── data/
-│   ├── hospitals_bbsr.csv          # dim_hospital source data (37 hospitals)
-│   ├── dim_locality.csv            # 15 Bhubaneswar localities
-│   ├── dim_emergency_type.csv      # 8 emergency categories + required resources
-│   ├── hospital_coords.csv         # lat/long lookup for each hospital
-│   └── fact_emergency_admission.csv # 800 synthetic emergency records
-├── schema.sql                      # star schema (SQLite)
-├── load_data.py                    # builds emergency_admit.db from the CSVs
-├── recommend.py                    # scoring/ranking engine (run standalone or import)
-├── mining_analysis.py              # clustering, pattern mining, classification
-├── app.py                          # tiny Flask web demo
-├── requirements.txt
-└── README.md
-```
+The project is designed as an academic prototype for **Bhubaneswar and the wider Khordha region of Odisha**.
 
-## Setup
+---
 
-1. Install Python 3.9+ if you don't already have it.
-2. Open a terminal in this folder and install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+## 📌 Project Overview
 
-## Run order
+During an emergency, selecting the nearest hospital does not always guarantee that the required medical facilities are available.
 
-1. **Build the database** (do this first, and again any time a CSV changes):
-   ```
-   python3 load_data.py
-   ```
-   This creates `emergency_admit.db` in this folder.
+RapidCare addresses this problem by analyzing hospital and emergency-related data and ranking hospitals according to their suitability for a particular emergency.
 
-2. **Try the recommendation engine** from the command line:
-   ```
-   python3 recommend.py
-   ```
-   It will show you the list of valid locality names and emergency types,
-   then ask you to type one of each, and print a ranked hospital list.
+The system uses:
 
-3. **Run the data mining analysis**:
-   ```
-   python3 mining_analysis.py
-   ```
-   This prints:
-   - Hospital capability clusters (KMeans)
-   - Most common emergency type per locality
-   - Average wait time by hospital type
-   - Outcome distribution by severity
-   - A decision tree predicting admission outcome, with feature importances
+- Data Warehousing
+- ETL processing
+- Star Schema
+- SQL-based data storage
+- Data Mining
+- K-Means Clustering
+- Pattern Analysis
+- Decision Tree Classification
+- Weighted Hospital Ranking
+- Geographic Distance Calculation
+- Flask Web Application
 
-   It also saves two chart images in this folder:
-   `hospital_clusters.png` and `outcome_by_severity.png`.
+---
 
-4. **Run the web demo** (optional, good for presenting):
-   ```
-   python3 app.py
-   ```
-   Then open `http://127.0.0.1:5000` in your browser. Pick a locality and
-   emergency type from the dropdowns and see the ranked hospital table.
+## 🎯 Objectives
 
-## Notes for your report
+The main objectives of RapidCare are:
 
-- All hospital resource figures (beds, ICU, ventilators, doctors) are
-  **simulated but realistic** — live, real-time hospital availability data
-  is not publicly available in India, so this is a standard and expected
-  limitation to state clearly in your report.
-- The scoring formula in `recommend.py` (`W_DISTANCE`, `W_ICU_AVAILABLE`,
-  etc.) is intentionally simple and adjustable — explain your chosen
-  weights in the report, and feel free to tune them.
-- The `fact_emergency_admission.csv` records were generated using distance
-  calculations (haversine formula) and severity-aware probability
-  distributions, not pure random numbers — this is your "ETL/data
-  generation methodology" section.
+1. Recommend suitable hospitals for emergency situations.
+2. Rank hospitals according to multiple emergency-related factors.
+3. Store hospital and emergency information using a data warehouse structure.
+4. Apply data mining techniques to identify useful patterns.
+5. Cluster hospitals according to their available resources.
+6. Analyze emergency outcomes and hospital patterns.
+7. Provide a simple web interface for users.
+8. Demonstrate the practical application of Data Mining and Data Warehousing concepts.
+
+---
+
+## ✨ Key Features
+
+### 🏥 Emergency Hospital Recommendation
+
+Users can select:
+
+- Patient locality
+- Emergency type
+
+RapidCare then generates a ranked list of suitable hospitals.
+
+### 📍 Locality-Based Recommendation
+
+The system contains locality information including:
+
+- Locality name
+- Zone
+- Latitude
+- Longitude
+- Population density tier
+
+The current dataset contains **50 localities**.
+
+### 🚨 Emergency Type Selection
+
+The system supports **8 emergency categories** with information such as:
+
+- Emergency type
+- Required specialty
+- Required resources
+- Severity level
+- Golden-hour limit
+
+### 🏨 Hospital Resource Analysis
+
+Hospital ranking considers:
+
+- Available beds
+- ICU availability
+- Ventilator availability
+- Specialist doctors
+- Average waiting time
+- Hospital distance
+- Trauma center availability
+- Blood bank availability
+
+### 📊 Hospital Ranking
+
+Hospitals are ranked using a weighted scoring approach.
+
+The current weights are:
+
+| Factor | Weight |
+|---|---:|
+| Distance | 35% |
+| ICU Availability | 20% |
+| Bed Availability | 15% |
+| Waiting Time | 15% |
+| Specialist Doctors | 15% |
+
+### 📈 Data Mining
+
+The project includes:
+
+- K-Means Clustering
+- Pattern Analysis
+- Decision Tree Classification
+
+### 🗺️ Geographic Distance
+
+The system uses the **Haversine formula** to calculate the geographical distance between the selected locality and hospitals.
+
+### 🌐 Web Application
+
+The backend is developed using **Flask** and the frontend uses:
+
+- HTML
+- CSS
+- JavaScript
+- Jinja templates
+
+---
+
+## 🏗️ System Architecture
+
+The overall workflow of RapidCare is:
+
+```text
+                 ┌──────────────────────┐
+                 │      User Input      │
+                 │ Locality + Emergency │
+                 │        Type          │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │    Flask Backend     │
+                 │       app.py        │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │   Recommendation     │
+                 │       Engine         │
+                 │    recommend.py      │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+              ┌─────────────────────────────┐
+              │       SQLite Database       │
+              │      Data Warehouse         │
+              └─────────────┬───────────────┘
+                            │
+             ┌──────────────┼──────────────┐
+             ▼              ▼              ▼
+      ┌────────────┐ ┌────────────┐ ┌──────────────┐
+      │ Hospitals  │ │ Localities │ │ Emergency    │
+      │ Dimension  │ │ Dimension  │ │ Type         │
+      └────────────┘ └────────────┘ │ Dimension    │
+                                    └──────────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │   Ranked Hospitals   │
+                 │      Top 5 Results   │
+                 └──────────────────────┘
